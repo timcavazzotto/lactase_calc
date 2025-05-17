@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Lactase (FCC)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #f0faff, #ffffff);
+      background-image: url('https://images.unsplash.com/photo-1578985545062-69928b1d9587');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #333;
+    }
+
+    .container {
+      max-width: 500px;
+      background-color: rgba(255, 255, 255, 0.9);
+      margin: 50px auto;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #0077cc;
+      text-align: center;
+    }
+
+    label {
+      font-weight: 600;
+      margin-top: 15px;
+      display: block;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #0077cc;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 16px;
+      margin-top: 20px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    #resultado {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #e8f4ff;
+      border-left: 5px solid #0077cc;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Calculadora de Lactase Exógena (FCC)</h1>
+
+    <label for="alimento">Escolha o alimento:</label>
+    <select id="alimento">
+      <option value="">Selecione...</option>
+      <option value="leite">Leite</option>
+      <option value="sorvete">Sorvete</option>
+      <option value="pizza">Pizza 4 queijos</option>
+      <option value="iogurte">Iogurte</option>
+      <option value="pudim">Pudim de leite</option>
+      <option value="requeijao">Requeijão</option>
+      <option value="queijo_minas">Queijo minas</option>
+      <option value="chocolate">Chocolate ao leite</option>
+    </select>
+
+    <label for="medida">Forma de medida:</label>
+    <select id="medida">
+      <option value="">Selecione...</option>
+      <option value="ml">ml</option>
+      <option value="g">gramas</option>
+      <option value="colher">colher de sopa (~30g)</option>
+      <option value="copo">copo americano (~200ml)</option>
+      <option value="concha">concha (~100ml)</option>
+      <option value="fatia">fatia (~70g)</option>
+    </select>
+
+    <label for="quantidade">Quantidade:</label>
+    <input type="number" id="quantidade" min="1" placeholder="Ex: 1">
+
+    <button onclick="calcularFCC()">Lactase: Dose certa</button>
+
+    <div id="resultado"></div>
+  </div>
+
+  <script>
+    const alimentos = {
+      leite: { referencia: 240, lactose: 12 },
+      sorvete: { referencia: 100, lactose: 6 },
+      pizza: { referencia: 140, lactose: 9 },
+      iogurte: { referencia: 170, lactose: 8 },
+      pudim: { referencia: 100, lactose: 10 },
+      requeijao: { referencia: 30, lactose: 2 },
+      queijo_minas: { referencia: 50, lactose: 2 },
+      chocolate: { referencia: 30, lactose: 3 }
+    };
+
+    const conversao = {
+      ml: 1,
+      g: 1,
+      colher: 30,
+      copo: 200,
+      concha: 100,
+      fatia: 70
+    };
+
+    function calcularFCC() {
+      const alimentoSelecionado = document.getElementById('alimento').value;
+      const medida = document.getElementById('medida').value;
+      const quantidade = parseFloat(document.getElementById('quantidade').value);
+      const resultadoDiv = document.getElementById('resultado');
+
+      if (!alimentoSelecionado || !alimentos[alimentoSelecionado]) {
+        resultadoDiv.innerHTML = "<p style='color:red'>Por favor, selecione um alimento.</p>";
+        return;
+      }
+
+      if (!medida || !conversao[medida]) {
+        resultadoDiv.innerHTML = "<p style='color:red'>Selecione a forma de medida.</p>";
+        return;
+      }
+
+      if (isNaN(quantidade) || quantidade <= 0) {
+        resultadoDiv.innerHTML = "<p style='color:red'>Informe uma quantidade válida.</p>";
+        return;
+      }
+
+      const totalGramas = quantidade * conversao[medida];
+      const alimento = alimentos[alimentoSelecionado];
+      const lactoseEstimada = (totalGramas / alimento.referencia) * alimento.lactose;
+
+      let fcc;
+      if (lactoseEstimada <= 2) fcc = '2.000 FCC';
+      else if (lactoseEstimada <= 5) fcc = '3.000–5.000 FCC';
+      else if (lactoseEstimada <= 10) fcc = '6.000–9.000 FCC';
+      else fcc = '9.000–12.000 FCC ou mais';
+
+      resultadoDiv.innerHTML = `
+        <p><strong>Lactose estimada:</strong> ${lactoseEstimada.toFixed(1)}g</p>
+        <p><strong>Dose recomendada de lactase:</strong> ${fcc}</p>
+        <p style="font-size: 0.9em; color: #666; margin-top: 10px;">* Estimativas baseadas em médias de lactose por porção e diretrizes gerais. Pode variar por marca, preparo e sensibilidade individual.</p>
+      `;
+    }
+  </script>
+</body>
+</html>
