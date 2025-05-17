@@ -184,7 +184,9 @@
       if (lactoseEstimada <= 2) fcc = '2.000 FCC';
       else if (lactoseEstimada <= 5) fcc = '3.000–5.000 FCC';
       else if (lactoseEstimada <= 10) fcc = '6.000–9.000 FCC';
-      else fcc = '9.000–12.000 FCC ou mais';
+      else if (lactoseEstimada <= 15) fcc = '9.000-12.000 FCC';
+      else if (lactoseEstimada <= 20) fcc = '13.000-19.000 FCC';
+      else fcc = '20.000 FCC ou mais (1 caps a cada 30min)';
 
       return `
         <p><strong>Lactose estimada:</strong> ${lactoseEstimada.toFixed(1)}g</p>
