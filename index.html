@@ -205,7 +205,7 @@
       `;
     }
 
-    function iniciarCalculo() {
+      function iniciarCalculo() {
       const alimentoSelecionado = document.getElementById('alimento').value;
       const medida = document.getElementById('medida').value;
       const quantidade = parseFloat(document.getElementById('quantidade').value);
@@ -228,9 +228,9 @@
         return;
       }
 
-      resultadoCalculado = calcularFCC(alimentoSelecionado, medida, quantidade);
+      resultadoDiv.innerHTML = calcularFCC(alimentoSelecionado, medida, quantidade);
+    }
+  </script>
 
-       
-</script>
 </body>
 </html>
