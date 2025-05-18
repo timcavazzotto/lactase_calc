@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title> Dose ideal de Lactase - Para intolerantes à lactose </title>
+  <title>Dose ideal de Lactase - Para intolerantes à lactose</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
   <style>
@@ -12,11 +12,8 @@
       margin: 0;
       padding: 0;
       background: linear-gradient(to bottom, #f0faff, #ffffff);
-      background-image: url('Foto de Polina Tankilevitch no Pexels: https://www.pexels.com/pt-br/foto/comida-alimento-refeicao-saudavel-4110199/');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      color: 30475E;
+      /* removi o background-image com link inválido para não dar erro */
+      color: #30475E; /* corrigido: precisa ser string com # */
     }
 
     .container {
@@ -26,7 +23,8 @@
       padding: 30px;
       border-radius: 15px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      }
+      text-align: center; /* para centralizar texto e elementos inline */
+    }
     
     .logo {
       max-height: 60px;
@@ -36,13 +34,14 @@
 
     h1 {
       color: #30475E;
-      text-align: center;
+      margin-bottom: 25px;
     }
 
     label {
       font-weight: 600;
       margin-top: 15px;
       display: block;
+      text-align: left; /* para os labels ficarem alinhados à esquerda */
     }
 
     select,
@@ -52,6 +51,7 @@
       margin-top: 5px;
       border-radius: 5px;
       border: 1px solid #ccc;
+      box-sizing: border-box;
     }
 
     button {
@@ -74,11 +74,12 @@
       border-left: 5px solid #30475E;
       border-radius: 5px;
       min-height: 60px;
+      text-align: left;
     }
 
     /* Modal do anúncio */
     #adModal {
-      display: flex; /* para usar flex */
+      display: flex;
       position: fixed;
       top: 0;
       left: 0;
@@ -115,8 +116,13 @@
 </head>
 <body>
   <div class="container"> 
-  <img src="https://raw.githubusercontent.com/timcavazzotto/lactase_calc/main/logo-mets2.png" alt="Logo METS" class="logo">
-  <h1>Calculadora de Lactase </h1>
+    <!-- Link direto para a imagem raw no GitHub -->
+    <img 
+      src="https://raw.githubusercontent.com/timcavazzotto/lactase_calc/main/logo-mets2.png" 
+      alt="Logo METS" 
+      class="logo"
+    >
+    <h1>Calculadora de Lactase</h1>
 
     <label for="alimento">Escolha o alimento:</label>
     <select id="alimento">
@@ -154,7 +160,6 @@
   <div id="adModal">
     <div id="adContent">
       <p>Publicidade - Aguarde 30 segundos para ver o resultado</p>
-      <!-- Aqui pode colocar uma imagem, vídeo, ou anúncio HTML -->
       <img src="https://via.placeholder.com/320x100?text=Seu+Anúncio+AQUI" alt="Anúncio" style="max-width: 100%; border-radius: 8px;" />
     </div>
   </div>
@@ -208,7 +213,7 @@
       const quantidade = parseFloat(document.getElementById('quantidade').value);
       const resultadoDiv = document.getElementById('resultado');
 
-      resultadoDiv.innerHTML = ''; // limpa resultado anterior
+      resultadoDiv.innerHTML = '';
 
       if (!alimentoSelecionado || !alimentos[alimentoSelecionado]) {
         resultadoDiv.innerHTML = "<p style='color:red'>Por favor, selecione um alimento.</p>";
@@ -225,14 +230,11 @@
         return;
       }
 
-      // Calcula o resultado mas não mostra ainda
       resultadoCalculado = calcularFCC(alimentoSelecionado, medida, quantidade);
 
-      // Mostra o modal do anúncio
       const adModal = document.getElementById('adModal');
       adModal.classList.add('show');
 
-      // Após 30 segundos esconde o anúncio e mostra o resultado
       setTimeout(() => {
         fecharAnuncio();
       }, 30000);
@@ -246,5 +248,3 @@
   </script>
 </body>
 </html>
-
-
