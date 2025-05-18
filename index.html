@@ -126,16 +126,28 @@
 
     <label for="alimento">Escolha o alimento:</label>
     <select id="alimento">
-      <option value="">Selecione...</option>
-      <option value="leite">Leite</option>
-      <option value="sorvete">Sorvete</option>
-      <option value="pizza">Pizza 4 queijos</option>
-      <option value="iogurte">Iogurte</option>
-      <option value="pudim">Pudim de leite</option>
-      <option value="requeijao">Requeijão</option>
-      <option value="queijo_minas">Queijo minas</option>
-      <option value="chocolate">Chocolate ao leite</option>
-    </select>
+  <option value="">Selecione...</option>
+  <option value="leite">Leite</option>
+  <option value="sorvete">Sorvete tradicional</option>
+  <option value="pizza">Pizza 4 queijos</option>
+  <option value="iogurte">Iogurte natural</option>
+  <option value="pudim">Pudim de leite</option>
+  <option value="requeijao">Requeijão</option>
+  <option value="queijo_minas">Queijo minas</option>
+  <option value="chocolate">Chocolate ao leite</option>
+  <option value="manteiga">Manteiga</option>
+  <option value="creme_de_leite">Creme de leite</option>
+  <option value="leite_condensado">Leite condensado</option>
+  <option value="queijo_mussarela">Queijo mussarela</option>
+  <option value="queijo_parmesao">Queijo parmesão</option>
+  <option value="queijo_ricota">Queijo ricota</option>
+  <option value="iogurte_grego">Iogurte grego</option>
+  <option value="sorvete_vegano">Sorvete vegano (sem lactose)</option>
+  <option value="leite_de_soja">Leite de soja (sem lactose)</option>
+  <option value="kefir">Kefir</option>
+  <option value="chocolate_amargo">Chocolate amargo</option>
+</select>
+
 
     <label for="medida">Forma de medida:</label>
     <select id="medida">
@@ -166,15 +178,25 @@
 
   <script>
     const alimentos = {
-      leite: { referencia: 240, lactose: 12 },
-      sorvete: { referencia: 100, lactose: 6 },
-      pizza: { referencia: 140, lactose: 9 },
-      iogurte: { referencia: 170, lactose: 8 },
-      pudim: { referencia: 100, lactose: 10 },
-      requeijao: { referencia: 30, lactose: 2 },
-      queijo_minas: { referencia: 50, lactose: 2 },
-      chocolate: { referencia: 30, lactose: 3 }
-    };
+  leite: { referencia: 240, lactose: 12 },                // ml
+  sorvete: { referencia: 100, lactose: 6 },               // g
+  pizza: { referencia: 140, lactose: 9 },                 // g (ex: pizza 4 queijos)
+  iogurte: { referencia: 170, lactose: 8 },               // g
+  pudim: { referencia: 100, lactose: 10 },                // g
+  requeijao: { referencia: 30, lactose: 2 },              // g
+  queijo_minas: { referencia: 50, lactose: 2 },           // g
+  chocolate: { referencia: 30, lactose: 3 },              // g (ao leite)
+  manteiga: { referencia: 14, lactose: 0.5 },             // g (1 colher de sopa = 14g)
+  creme_de_leite: { referencia: 30, lactose: 2 },         // g
+  leite_condensado: { referencia: 30, lactose: 5 },       // g
+  queijo_mussarela: { referencia: 50, lactose: 1 },       // g
+  queijo_parmesao: { referencia: 30, lactose: 0.1 },      // g (praticamente sem lactose)
+  queijo_ricota: { referencia: 50, lactose: 3 },          // g
+  iogurte_grego: { referencia: 150, lactose: 4 },         // g
+  kefir: { referencia: 100, lactose: 4 },                  // g
+  chocolate_amargo: { referencia: 30, lactose: 0.5 }      // g (pouquíssima lactose)
+};
+
 
     const conversao = {
       ml: 1,
